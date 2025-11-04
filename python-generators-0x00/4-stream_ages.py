@@ -1,5 +1,6 @@
 from seed import connect_to_db
-def stream_user_ages(batch_size=10):
+def stream_user_ages():
+    batch_size=100
     connection=connect_to_db()
     cursor=connection.cursor()
     cursor.execute("SELECT age from  alx_prodev.user_data;")
