@@ -59,10 +59,10 @@ def connect_to_db(db_name="ALX_prodev"):
         )
         if connection.is_connected():
             print(f"Connected to database {db_name}")
-            yield connection
+            return connection
     except mysql.connector.Error as err:
         print(f"Error: {err}")
-        yield None
+        return None
 
 def create_table(connection):
     cursor = connection.cursor()
