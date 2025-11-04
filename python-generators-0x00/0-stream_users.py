@@ -11,4 +11,4 @@ def stream_users():
     connection.close()
 rows = stream_users()
 for row in rows:
-    print(row)
+    print(row)##
