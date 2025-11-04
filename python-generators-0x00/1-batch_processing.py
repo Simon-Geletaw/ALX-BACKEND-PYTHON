@@ -11,7 +11,7 @@ def stream_users_in_batches(batch_size=10):
             break
         print(f" number of fetched{len(rows)}")
         for row in rows:
-                return row
+                 yield
     cursor.close()
     connection.close()
     
@@ -22,7 +22,7 @@ def batch_processing():
         user_id,name,email, age=row
         if age>25:
             print(" this are from above 25")
-            print(row)
+            yield row
             count=count+1
     print(count)
-batch_processing()
+rows=batch_processing()
