@@ -30,7 +30,7 @@ def batch_processing():
         if age > 25:
             print("This user is above 25:")
             print(row)
-            count += 1
+            count += 1  # increment counter
     print(f"Total users above 25: {count}")
 
 
