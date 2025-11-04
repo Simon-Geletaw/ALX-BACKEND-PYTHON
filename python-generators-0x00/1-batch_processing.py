@@ -11,7 +11,7 @@ def stream_users_in_batches(batch_size=10):
             break
         print(f" number of fetched{len(rows)}")
         for row in rows:
-                yield row
+                return row
     cursor.close()
     connection.close()
     
