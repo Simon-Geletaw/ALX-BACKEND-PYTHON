@@ -81,17 +81,3 @@ def create_table(connection):
         print(f"Error creating table: {err}")
     finally:
         cursor.close()
-
-# --- Usage ---
-conn = connect_db()
-if conn:
-    create_database(conn)
-    conn.close()
-
-    # Connect to the newly created database
-    conn_db = connect_to_db("ALX_prodev")
-    insert_data(conn_db,"user_data.csv")
-    
-    if conn_db:
-        create_table(conn_db)
-        conn_db.close()

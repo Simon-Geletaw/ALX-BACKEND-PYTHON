@@ -6,3 +6,6 @@ def paginate_users(page_size, offset):
     rows=cursor.fetchall()
     for row in rows:
         yield row
+rows=paginate_users(10,0)
+for row in rows:
+    print(row)
