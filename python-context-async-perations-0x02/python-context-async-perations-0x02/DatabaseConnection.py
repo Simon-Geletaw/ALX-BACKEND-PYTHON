@@ -1,9 +1,7 @@
 import sqlite3
 class DatabaseConnection :
     def __init__(self,dbname):
-        self.db_name=dbname
-        self
-        
+        self.db_name=dbname        
     def __enter__(self):
         print("Connecting to db.....")
         conn=sqlite3.connect(self.db_name)
