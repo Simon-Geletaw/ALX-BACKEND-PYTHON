@@ -14,10 +14,10 @@ def stream_users_in_batches(batch_size=10):
         if not rows:
             break
         for row in rows:
-            yield row  # ✅ yield each row
+            yield row  
     cursor.close()
     connection.close()
-    return  # ✅ return at the very end of the generator is fine
+    return  
 
 
 def batch_processing():
@@ -32,7 +32,7 @@ def batch_processing():
             print(row)
             count += 1
     print(f"Total users above 25: {count}")
-    return  # ✅ optional return at the end of a normal function
+    return 
 
 
 # Execute batch processing
