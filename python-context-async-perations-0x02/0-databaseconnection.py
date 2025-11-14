@@ -12,10 +12,11 @@ class DatabaseConnection :
         print("excc",exc_type)
         print("execcc",exc_value)
         print("Connection is closed")
-with DatabaseConnection('users.db') as conn:
+        
+"""with DatabaseConnection('users.db') as conn:
     cursor=conn.cursor()
     cursor.execute("SELECT * FROM users ")
     results= cursor.fetchall()
     for result in results :
         print(result)
-    cursor.close()
+    cursor.close()"""
