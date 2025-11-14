@@ -1,13 +1,13 @@
 import asyncio
 import aiosqlite
 
-async def async_fetch_users(connection):
+async def async_fetch_users():
     async with connection.execute("SELECT * FROM users") as cursor:
         print("start executing users")
         results = await cursor.fetchall()
         return results
 
-async def async_fetch_older_users(connection):
+async def async_fetch_older_users():
     async with connection.execute("SELECT * FROM users WHERE age > ?", (40,)) as cursor:
         print("executing the age part")
         results_age = await cursor.fetchall()
