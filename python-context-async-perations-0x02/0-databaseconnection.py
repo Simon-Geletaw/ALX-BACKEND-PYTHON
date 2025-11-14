@@ -14,7 +14,7 @@ class DatabaseConnection :
         print("Connection is closed")
 with DatabaseConnection('users.db') as conn:
     cursor=conn.cursor()
-    cursor.execute("select * from users ")
+    cursor.execute("SELECT * FROM users ")
     results= cursor.fetchall()
     for result in results :
         print(result)
