@@ -13,7 +13,7 @@ async def async_fetch_older_users():
         results_age = await cursor.fetchall()
         return results_age
 
-async def main():
+async def fetch_concurrently():
     async with aiosqlite.connect('users.db') as conn:
         
         # Create tasks
@@ -27,4 +27,4 @@ async def main():
         print("All users:", results[0])
         print("Older users:", results[1])
 
-asyncio.run(main())
+asyncio.run(fetch_concurrently())
