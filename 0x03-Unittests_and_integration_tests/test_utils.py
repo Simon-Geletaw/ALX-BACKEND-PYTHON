@@ -13,4 +13,4 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(self, nested_map, path, expected):
         """Test access_nested_map using parameterized decorator."""
-        self.assertEqual(access_nested_map(nested_map, path), expected)    
+        self.assertEqual(access_nested_map(nested_map, path), expected) 
