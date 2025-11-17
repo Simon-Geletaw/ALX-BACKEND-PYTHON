@@ -70,6 +70,5 @@ def memoize(fn: Callable) -> Callable:
         """"memoized wraps"""
         if not hasattr(self, attr_name):
             setattr(self, attr_name, fn(self))
-        return getattr(self, attr_name)
-
+        return getattr(self, attr_name)  
     return property(memoized)
