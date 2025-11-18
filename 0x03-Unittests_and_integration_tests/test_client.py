@@ -6,7 +6,7 @@ from parameterized import parameterized
 import unittest
 
 
-class TestGithubClient(unittest.TestCase):
+class TestGithubOrgClient(unittest.TestCase):
     @parameterized.expand([("google",),
                            "abc",])
     @patch('client.get_json')
