@@ -7,8 +7,8 @@ import unittest
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    @parameterized.expand([("google",),
-                           "abc",])
+    @parameterized.expand([("google", ),
+                           "abc", ])
     @patch('client.get_json')
     def test_org(self, org, mock_test):
         mock_test.return_value = {"login": org}
