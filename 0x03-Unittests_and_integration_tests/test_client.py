@@ -57,8 +57,18 @@ class TestGithubOrgClient(unittest.TestCase):
             # Ensure _public_repos_url was accessed exactly once
             mock_repos_url.assert_called_once()
 
-            # Ensure get_json was called exactly once with the mocked URL
             mock_get_json.assert_called_once_with("https://api.github.com/orgs/google/repos")
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license", }}, "my_license", True),
+                      
+        ({"license": {"key": "other_license"}}, ("my_license"), False)])
+    def test_has_license(self, license, license_key, output):
+
+        client = GithubOrgClient("google")
+        result = client.has_license(license, license_key)
+        self.assertEqual(result, output)
+      
 
 
 if __name__ == '__main__':
