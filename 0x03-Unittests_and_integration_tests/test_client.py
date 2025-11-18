@@ -30,7 +30,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch("client.get_json")  # patch get_json as a decorator
     def test_public_repos(self, mock_get_json):
-        """Test GithubOrgClient.public_repos returns 
+        """Test GithubOrgClient.public_repos returns
         the expected list of repo names"""
 
         # Fake payload returned by get_json
