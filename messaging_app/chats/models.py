@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from django.contrib.auth.models import AbstractUser
 
 
@@ -7,6 +8,10 @@ class User(AbstractUser):
     role = models.CharField(max_length=20, choices=Role_choice, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(max_length=254, unique=True, null=False, )
+    first_name
+    last_name
+    password
+    user_id
 
 
 class Message(models.Model):
