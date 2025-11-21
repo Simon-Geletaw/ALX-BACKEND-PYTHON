@@ -17,7 +17,9 @@ class conversations(serializers.ModelSerializer):
 
     class Meta:
         model = Conversation
-        fields = ['conversation_id', 'created_id', 'participants_id']
+        fields = ['conversation_id', 'created_id', 'last_message' ,'participants_id']
+        fields = "__all__"  # <-- REQUIRED
+
     
     def get_last_message(self, obj):
         last_msg = obj.messages.last()
@@ -33,6 +35,8 @@ class messages(serializers.ModelSerializer):
     class Meta:
         model = Message
         field = ['message_id', 'content', 'sent_at', 'sender_id']
+        fields = "__all__"  # <-- REQUIRED
+
 
     def validate_content(self, value):
         if not value.strip():
