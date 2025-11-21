@@ -12,6 +12,7 @@ class User(AbstractUser):
     last_name
     password
     user_id
+    phone_number
 
 
 class Message(models.Model):
