@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from chats.models import User, Conversation, Message
+from models import User, Conversation, Message
 
 
 class users(serializers.ModelSerializer):
@@ -13,20 +13,31 @@ class users(serializers.ModelSerializer):
 
 class conversations(serializers.ModelSerializer):
     participants_id = users(many=True, read_only=True)
+    last_message = serializers.SerializerMethodField()        # ✅ SerializerMethodField
 
     class Meta:
         model = Conversation
         fields = ['conversation_id', 'created_id', 'participants_id']
+    
+    def get_last_message(self, obj):
+        last_msg = obj.messages.last()
+        if last_msg:
+            return messages(last_msg).data
+        return None
 
 
 class messages(serializers.ModelSerializer):
     participants = users(many=True, read_only=True)
-    
+    content = serializers.CharField(max_length=500)  
+
     class Meta:
         model = Message
-        field = ['message_id', 'message_body', 'sent_at', 'sender_id']
+        field = ['message_id', 'content', 'sent_at', 'sender_id']
 
-         
+    def validate_content(self, value):
+        if not value.strip():
+            raise serializers.ValidationError("Message cannot be empty")
+        return value
    # Get a user instance
 user = User.objects.first()
 
