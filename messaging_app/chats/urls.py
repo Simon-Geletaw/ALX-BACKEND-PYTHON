@@ -1,14 +1,10 @@
-from django.contrib import admin
-from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
-    # JWT Authentication endpoints
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
-    # App URLs
-    path('api/', include('chats.urls')),  
+    path('messages/', views.MessageListView.as_view(), name='messages'),
+    path('messages/<uuid:pk>/', views.MessageDetailView.as_view(), name='message-detail'),
+    
+    path('conversations/', views.ConversationListView.as_view(), name='conversations'),
+    path('conversations/<uuid:pk>/', views.ConversationDetailView.as_view(), name='conversation-detail'),
 ]
