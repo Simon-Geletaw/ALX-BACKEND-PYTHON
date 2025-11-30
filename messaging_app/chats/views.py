@@ -13,7 +13,7 @@ from .permissions import IsOwner
 
 class MessageListView(APIView):
     permission_classes = [IsAuthenticated]
-
+    
     def get(self, request):
         # Return only messages where the user is the sender
         messages = Message.objects.filter(sender=request.user)
@@ -22,8 +22,7 @@ class MessageListView(APIView):
 
 
 class MessageDetailView(APIView):
-    permission_classes = [IsAuthenticated, IsOwner]
-
+    ##permission_classes = [IsAuthenticated, IsOwner]
     def get(self, request, pk):
         message = get_object_or_404(Message, pk=pk)
         self.check_object_permissions(request, message)
@@ -36,7 +35,7 @@ class MessageDetailView(APIView):
 # ------------------------------
 
 class ConversationListView(APIView):
-    permission_classes = [IsAuthenticated]
+    ##permission_classes = [IsAuthenticated]
 
     def get(self, request):
         # Return only conversations where the user is a participant

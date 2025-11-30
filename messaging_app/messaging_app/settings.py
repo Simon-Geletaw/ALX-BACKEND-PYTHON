@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'messaging_app.middleware.ip_black_list.Ipblacklistmiddleware'
 ]
 
 ROOT_URLCONF = 'messaging_app.urls'
@@ -130,9 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "chats.User"
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+Banned_IPs = [
+    '127.0.0.1'
+]
