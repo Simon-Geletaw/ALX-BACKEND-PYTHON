@@ -13,13 +13,13 @@ class users(serializers.ModelSerializer):
 
 class conversations(serializers.ModelSerializer):
     participants_id = users(many=True, read_only=True)
-    last_message = serializers.SerializerMethodField()        # ✅ SerializerMethodField
+    last_message = serializers.SerializerMethodField()
 
     class Meta:
         model = Conversation
         fields = ['participants_id']
         fields = "__all__"  # <-- REQUIRED
-  
+
     def get_last_message(self, obj):
         last_msg = obj.messages.last()
         if last_msg:
@@ -34,8 +34,7 @@ class messages(serializers.ModelSerializer):
     class Meta:
         model = Message
         field = ['message_id', 'content', 'sent_at', 'sender_id']
-        fields = "__all__"  # <-- REQUIRED
-
+        fields = "__all__" 
     def validate_content(self, value):
         if not value.strip():
             raise serializers.ValidationError("Message cannot be empty")
