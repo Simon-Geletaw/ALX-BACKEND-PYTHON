@@ -54,7 +54,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'messaging_app.middleware.ip_black_list.Ipblacklistmiddleware'
-    'chats.middleware.RequestLoggingMiddleware'
+    'chats.middleware.RequestLoggingMiddleware',
+    'chats.middleware.OffensiveLanguageMiddleware'
 ]
 
 ROOT_URLCONF = 'messaging_app.urls'
