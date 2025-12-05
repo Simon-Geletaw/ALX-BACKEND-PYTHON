@@ -6,8 +6,7 @@ from .models import Message,  User
 from django.db.models import Q
 
 
-request.user
-reciever
+[sender=request.user, receiver]
 class delete_user:
     def post(self, request, user_id):
         user = request.user
