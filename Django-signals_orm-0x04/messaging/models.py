@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save ,pre_save
 from django.dispatch import receiver
+from managers import UnreadMessagesManager
 
 
 class User(models.Model):
@@ -25,6 +26,8 @@ class Message(models.model):
     parent_message = models.ForeignKey('self', null=True, blank=True,
                                        on_delete=models.CASCADE)
     unread = models.BooleanField(default=False)
+    objects = models.Manager()  # Default manager
+    unread = UnreadMessagesManager()  # Custom manager
 
 
 class MessageHistory(models.Model):
