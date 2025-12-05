@@ -42,13 +42,3 @@ def _post_save_receiver(sender, **kwargs):
         notification_type="New Message"
     )
 
-@receiver(pre_save, sender=Message)
-def update_message_content_history(sender, instance, **kwargs):
-    message = Message.kwargs.get('instance')
-    user = message.sender
-    old_content = message.content
-    if Message.getattr('is_edited', sender=user):
-        MessageHistory.objects.create(
-            user=user,
-            oldcontent=old_content
-        )
