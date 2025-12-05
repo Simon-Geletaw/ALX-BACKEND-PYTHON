@@ -23,13 +23,10 @@ class Message(models.model):
     is_edited = models.BooleanField(default=False)
 
 
-<<<<<<< HEAD
 class MessageHistory(models.Model):
-=======
-class edit_history(models.Model):
->>>>>>> 29d1b12b7e73d3914fda4fdea380815063d0d76b
-    user = models.ForeignKey('User',on_delete=models.CASCADE)
+    edited_by = models.ForeignKey('User', on_delete=models.CASCADE)
     oldcontent = models.TextField()
+    edited_at = models.DateTimeField(auto_now_add=True)
     
 @receiver(post_save, sender=Message)
 def _post_save_receiver(sender, **kwargs):
@@ -42,3 +39,13 @@ def _post_save_receiver(sender, **kwargs):
         notification_type="New Message"
     )
 
+@receiver(pre_save, sender=Message)
+def update_message_content_history(sender, instance, **kwargs):
+    message = Message.kwargs.get('instance')
+    user = message.sender
+    old_content = message.content
+    if Message.getattr('is_edited', sender=user):
+        MessageHistory.objects.create(
+            user=user,
+            oldcontent=old_content
+        )
