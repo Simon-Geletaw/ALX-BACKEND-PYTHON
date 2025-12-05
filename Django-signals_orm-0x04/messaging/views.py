@@ -49,7 +49,7 @@ class UnreadMessagesView
     def get(self, request):
         user = request.User
         user=User.objects.get(id=user.id)
-        unread_messages = Message.unread.get_unread_message(user).only('id', 'sender__username', 'content', 'timestamp')
+        unread_messages = Message.unread.unread_for_user(user).only('id', 'sender__username', 'content', 'timestamp')
         data =[]
         if unread_messages is None:
             return JsonResponse({"message": "No unread messages"}, status=200)
