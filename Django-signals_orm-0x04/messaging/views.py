@@ -3,14 +3,14 @@ from django.http import HttpResponse
 from .models import Message, MessageHistory, User
 
 
-class DeleteUser:
+class delete_user:
     def post(self, request, user_id):
         user = request.user
         if user.id != user_id:
             return HttpResponse("Unauthorized", status=401)
         try:
-            user_to_delete = User.objects.get(id=user_id)
-            user_to_delete.delete()
+            user = User.objects.get(id=user_id)
+            user.delete()
             return HttpResponse("User and related data deleted successfully", status=200)
         except User.DoesNotExist:
             return HttpResponse("User not found", status=404)
