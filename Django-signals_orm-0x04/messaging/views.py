@@ -6,6 +6,8 @@ from .models import Message,  User
 from django.db.models import Q
 
 
+request.user
+reciever
 class delete_user:
     def post(self, request, user_id):
         user = request.user
@@ -30,10 +32,10 @@ class get_text_message:
         }
 
     def get(self, request, sender_id, reciever_id):
-        user = request.user
+        user =request.user
         messages = (
             Message.objects.filter(
-                Q(sender=request.User, reciever=reciever_id)
+                Q(sender_id=user, reciever_id=reciever_id)
                 | Q(sender_id=reciever_id, reciever_id=user)
             )
             .select_related("sender", "reciever", "parent_message")
