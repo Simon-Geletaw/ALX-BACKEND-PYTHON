@@ -26,6 +26,11 @@ SECRET_KEY = 'django-insecure-r%&=m!q^&!n17c_fr7%$$(#vgw#l((3cehz0=r!+c)nj50jv)$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CACHE ={'default': {
+    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    'LOCATION': 'unique-snowflake',
+    'TIMEOUT': 60   # Cache timeout in seconds 
+}}
 
 
 # Application definition

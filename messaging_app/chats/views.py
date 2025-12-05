@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from .models import Message, Conversation
 from .serializers import messages, conversations
 from .permissions import IsOwner
+from django.views.decorators import cache_page
+import time
 
 # ------------------------------
 # Messages
@@ -52,3 +54,11 @@ class ConversationDetailView(APIView):
         self.check_object_permissions(request, conversation)
         serializer = conversations(conversation)
         return Response(serializer.data)
+@cache_page(60 )  # cache the response for 60 seconds
+class Cacheing_ConversationListView(APIView):
+    def get(self, request):
+        # Return only conversations where the user is a participant
+        conversations = Conversation.objects.filter(participants=request.user)
+        serializer = conversations(conversations, many=True)
+        return Response(serializer.data)
+    

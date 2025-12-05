@@ -6,7 +6,7 @@ class RequestLoggingMiddleware:
         self.get_response = get_response
     
     def __call__(self, request):
-        start_time =time.time()
+        start_time = time.time()
         method = request.method
         path = request.get_full_path()
         with open("requests.log ", 'a') as  log_file:
