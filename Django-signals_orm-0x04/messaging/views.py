@@ -33,7 +33,7 @@ class get_text_message:
         user = request.user
         messages = (
             Message.objects.filter(
-                Q(sender_id=user, reciever_id=reciever_id)
+                Q(sender=request.User, reciever=reciever_id)
                 | Q(sender_id=reciever_id, reciever_id=user)
             )
             .select_related("sender", "reciever", "parent_message")
