@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from .models import Message,  User
 from django.db.models import Q
 from managers import UnreadMessagesManager
+from django.views.decorators.cache import cache_page
 
 
 [sender=request.user, receiver]
@@ -62,5 +63,21 @@ class UnreadMessagesView:
                     "timestamp": unread_message.timestamp,
                             })
             return JsonResponse({"unread_messages": data}, status=200)
-        
-   
+@cache_page(60)
+class Cacheing_UnreadMessagesView:
+    def get(self, request):
+        user = request.user
+        user = User.objects.get(id=user.id)
+        unread_messages = Message.unread.unread_for_user(user).only('id', 'sender__username', 'content', 'timestamp')
+        data = []
+        if unread_messages is None: 
+            return JsonResponse({"message": "No unread messages"}, status=200)
+        else:
+            for unread_message in unread_messages:
+                data.append({
+                    "id": unread_message.id,
+                    "sender": unread_message.sender.username,
+                    "content": unread_message.content,
+                    "timestamp": unread_message.timestamp,
+                })
+            return JsonResponse({"unread_messages": data}, status=200)
