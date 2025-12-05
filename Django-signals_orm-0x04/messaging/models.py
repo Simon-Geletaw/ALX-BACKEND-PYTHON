@@ -24,6 +24,7 @@ class Message(models.model):
     is_edited = models.BooleanField(default=False)
     parent_message = models.ForeignKey('self', null=True, blank=True,
                                        on_delete=models.CASCADE)
+    unread = models.BooleanField(default=False)
 
 
 class MessageHistory(models.Model):

@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from .models import Message,  User
 from django.db.models import Q
+from managers import UnreadMessagesManager
 
 
 [sender=request.user, receiver]
@@ -44,4 +45,22 @@ class get_text_message:
         message_threads = [self.build_thread(msg) for msg in messages if msg.parent_message is None]
         return JsonResponse({"threads": message_threads}, status=200)
                        
-               
+class UnreadMessagesView
+    def get(self, request):
+        user = request.User
+        user=User.objects.get(id=user.id)
+        unread_messages = UnreadMessagesManager.get_unread_message(user)
+        data =[]
+        if unread_messages is None:
+            return JsonResponse({"message": "No unread messages"}, status=200)
+        else:
+            for unread_message in unread_messages:
+                data.append({
+                    "id": unread_message.id,
+                    "sender": unread_message.sender.username,
+                    "content": unread_message.content,
+                    "timestamp": unread_message.timestamp,
+                            })
+            return JsonResponse({"unread_messages": data}, status=200)
+        
+   
