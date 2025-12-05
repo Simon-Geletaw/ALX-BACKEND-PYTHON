@@ -23,11 +23,7 @@ class Message(models.model):
     is_edited = models.BooleanField(default=False)
 
 
-<<<<<<< HEAD
 class MessageHistory(models.Model):
-=======
-class edit_history(models.Model):
->>>>>>> 29d1b12b7e73d3914fda4fdea380815063d0d76b
     user = models.ForeignKey('User',on_delete=models.CASCADE)
     oldcontent = models.TextField()
     
